@@ -44,7 +44,7 @@
     justify-content: space-between;
 }
 body{
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Space Mono', monospace;
 }
 /* -------MAIN USER ELEMENTS */
 .main-user-logo{
@@ -122,6 +122,44 @@ body{
     width: 90%;
     height: 38px;
     color: white;
+    font-family: 'Space Mono', monospace;
+}
+/*----- UNFOCUSED USERS SECTIONS */
+.unfocused-users>section{
+    display: flex;
+    padding: 5px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.unfocused-users img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.conversation-info{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+}
+.conversation-info>div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+ }
+.conversation-info>div>span:nth-child(1){
+    font-size: 12px;
+    color: #dfe0e2;
+}
+ .conversation-info>div>span:nth-child(2){
+    font-size: 10px;
+    color: #dfe0e2;
+
+}
+.conversation-info>span:nth-child(2){
+    margin-top: 5px;
+    font-size: 11px;
+    color: #dfe0e2;
 }
 /* --------------------- */
 /* --------------------- */
@@ -210,6 +248,7 @@ body{
     width: 100%;
     height: 40px;
     color: white;
+    font-family: 'Space Mono', monospace;
 }
 .send-menu div:first-child{
     width: 100px;
