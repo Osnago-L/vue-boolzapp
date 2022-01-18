@@ -3,6 +3,8 @@ var app = new Vue({
     data: {
         refchat: 0,
         introactive: true,
+        bellactive: true,
+        sendbuttonactive: false,
         inputchat: "",
         searchinput:'',
         contacts: [
@@ -97,31 +99,39 @@ var app = new Vue({
             this.refchat = UFIndex;
         },
         addMessage: function(){
+            let date = new Date()
+            // scusa in anticipo,Simone. 
+            let newdate = (date.getDate() + '/' +  ((date.getMonth() + 1) ? "0"+ (date.getMonth() + 1):(date.getMonth() + 1)) + '/' + date.getFullYear()) + " " + date.getHours() + ":" + (date.getMinutes()<10 ? "0"+ date.getMinutes():date.getMinutes()) + ":" + date.getSeconds();
+            
             this.contacts[this.refchat].messages.push(
                 {
-                    date: "",
+                    date: newdate,
                     text: this.inputchat,
                     status: 'sent'
                     }
             );
             setTimeout(() => {this.contacts[this.refchat].messages.push(
                 {
-                    date: "",
+                    date: newdate,
                     text: "ok",
                     status: 'received'
                     }
-            );}, 2000);
+            );}, 1000);
+            this.inputchat = ""
         },
         searchChat: function(){
             return this.contacts.filter((element) => element.name.toLowerCase().indexOf(this.searchinput)==0);
         },
         getSearchChat: function(){
-            
              this.contacts.forEach((element, index) => {
                  console.log(element.visible);
                 this.searchChat().includes(element) ? element.visible = true : element.visible = false;
                 console.log(element.visible);
             })
+        },
+        paperPlaneActive: function(){
+            
+            this.inputchat != "" ? this.sendbuttonactive = true : this.sendbuttonactive = false;
         },
     },
   });

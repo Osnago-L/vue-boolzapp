@@ -26,13 +26,13 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                             </div>
-                            <div class="bell-notification">
+                            <div class="bell-notification" :class="{inactive:!bellactive}">
                                 <div class="circle-bell">
                                     <i class="fa-solid fa-bell-slash"></i>
                                 </div>
                                 <div class="bell-text">
                                     <span>Ricevi notifiche di nuovi messaggi</span>
-                                    <span>Attiva notifiche desktop</span>
+                                    <span class="underline" @click="bellactive = false">Attiva notifiche desktop</span>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +77,12 @@
                         </div>
                         <div class="focused-chat">
                             <div>
-                                <div v-for="(FUser,FIndex) in contacts[refchat].messages" :class="`${contacts[refchat].messages[FIndex].status}-message`">
-                                    <span>{{contacts[refchat].messages[FIndex].text}}</span>
+                                <div v-for="(FUser,FIndex) in contacts[refchat].messages" :class="`${contacts[refchat].messages[FIndex].status}-message`" class="active">
+                                    <div>
+                                        <span>{{contacts[refchat].messages[FIndex].text}}</span>
+                                        <span>{{contacts[refchat].messages[FIndex].date}}</span>
+                                    </div>
+                                    <i class="fa-solid fa-angle-down"></i>
                                 </div>
                             </div>
                         </div>
@@ -87,8 +91,12 @@
                                 <i class="fa-regular fa-face-smile"></i>
                                 <i class="fa-solid fa-paperclip"></i>
                             </div>
-                            <input v-model="inputchat" type="text" placeholder="Scrivi un messaggio" @keyup.13="addMessage">
-                            <div><i class="fa-solid fa-microphone"></i></di>
+                            <input v-model="inputchat" type="text" placeholder="Scrivi un messaggio" @keyup.13="addMessage" @keyup="paperPlaneActive">
+                            <div>
+                                <i class="fa-solid fa-microphone" :class='{inactive:sendbuttonactive}'></i>
+                                <i class="fa-solid fa-paper-plane" :class='{inactive:!sendbuttonactive}'></i>
+                            </div>
+                                
                         </div>
                     </div>
                 </section>
