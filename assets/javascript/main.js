@@ -1,7 +1,9 @@
 var app = new Vue({
     el: '#app',
     data: {
-        refchat: 0,
+        refchat: 1,
+        introactive: true,
+        inputchat: "",
         contacts: [
             {
             name: 'Michele',
@@ -89,7 +91,26 @@ var app = new Vue({
         ]            
     },
     methods:{
-        
+        changeChat: function(UFIndex){
+            this.introactive = false;
+            this.refchat = UFIndex;
+        },
+        addMessage: function(){
+            this.contacts[this.refchat].messages.push(
+                {
+                    date: "",
+                    text: this.inputchat,
+                    status: 'sent'
+                    }
+            );
+            setTimeout(() => {this.contacts[this.refchat].messages.push(
+                {
+                    date: "",
+                    text: "ok",
+                    status: 'received'
+                    }
+            );}, 1000);
+        },
     }
   });
 

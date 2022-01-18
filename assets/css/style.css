@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.inactive{
+ display: none;
+}
+
 /* BACKGROUND */
 #background{
     background-color: #090e11;
@@ -278,7 +282,7 @@ body{
     display: flex;
     flex-direction: column;
 }
-.input-message{
+.received-message{
     padding: 10px;
     align-self: start;
     background-color: #262d31;
@@ -293,7 +297,7 @@ body{
     border-radius: 0px 20px 20px 20px;
     margin-bottom: 15px;
 }
-.input-message::before{
+.received-message::before{
     content: "";
     position: absolute;
     top: 0;
@@ -305,7 +309,7 @@ body{
     border-right: 8px solid transparent;
     border-top: 8px solid #262d31;
 }
-.output-message{
+.sent-message{
     padding: 10px;
     align-self: end;
     background-color: #056162;
@@ -320,7 +324,7 @@ body{
     border-radius: 20px 0px 20px 20px;
     margin-bottom: 15px;
 }
-.output-message::after{
+.sent-message::after{
     content: "";
     position: absolute;
     top: 0;
