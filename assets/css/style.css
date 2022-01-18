@@ -4,8 +4,12 @@
   box-sizing: border-box;
 }
 
+body{
+    font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
+}
+
 .inactive{
- display: none;
+ display: none!important;
 }
 
 /* BACKGROUND */
@@ -47,9 +51,7 @@
     align-items: center;
     justify-content: space-between;
 }
-body{
-    font-family: 'Space Mono', monospace;
-}
+
 /* -------MAIN USER ELEMENTS */
 .main-user-logo{
     width: 35px;
@@ -123,7 +125,8 @@ body{
     width: 90%;
     height: 38px;
     color: white;
-    font-family: 'Space Mono', monospace;
+    font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
+
 }
 /*----- UNFOCUSED USERS SECTIONS */
 .unfocused-users>section{
@@ -160,7 +163,7 @@ body{
 .conversation-info>span:nth-child(2){
     margin-top: 5px;
     font-size: 11px;
-    color: #dfe0e2;
+    color: #dfe0e273;
     text-overflow:ellipsis;
 }
 /* --------------------- */
@@ -358,7 +361,8 @@ body{
     width: 100%;
     height: 40px;
     color: white;
-    font-family: 'Space Mono', monospace;
+    font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
+
 }
 .send-menu div:first-child{
     width: 100px;

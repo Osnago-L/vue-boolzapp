@@ -41,7 +41,7 @@
                                 <input v-model="searchinput" type="text" placeholder="Cerca o inizia una nuova chat" @keyup="getSearchChat">
                             </div>
                             <div class="unfocused-users">
-                                <section v-for="(UFUsers, UFIndex) in searchableArray" @click="changeChat(UFIndex)">
+                                <section v-for="(UFUsers, UFIndex) in contacts" :class="{inactive:!contacts[UFIndex].visible}" @click="changeChat(UFIndex)">
                                     <img :src="UFUsers.avatar" alt="">
                                     <div class="conversation-info">
                                         <div>

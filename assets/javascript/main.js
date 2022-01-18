@@ -1,16 +1,15 @@
 var app = new Vue({
     el: '#app',
     data: {
-        refchat: 1,
+        refchat: 0,
         introactive: true,
         inputchat: "",
-        searchinput:'',    
-        searchableArray: [],
+        searchinput:'',
         contacts: [
             {
             name: 'Michele',
             avatar: 'https://unsplash.it/50/50?image=11',
-            visible: false,
+            visible: true,
             messages: [
                     {
                     date: '10/01/2020 15:30:55',
@@ -32,7 +31,7 @@ var app = new Vue({
             {
             name: 'Fabio',
             avatar: 'https://unsplash.it/50/50?image=15',
-            visible: false,
+            visible: true,
             messages: [
                     {
                     date: '20/03/2020 16:30:00',
@@ -54,7 +53,7 @@ var app = new Vue({
             {
             name: 'Samuele',
             avatar: 'https://unsplash.it/50/50?image=13',
-            visible: false,
+            visible: true,
             messages: [
                     {
                     date: '28/03/2020 10:10:40',
@@ -76,7 +75,7 @@ var app = new Vue({
             {
             name: 'Luisa',
             avatar: 'https://unsplash.it/50/50?image=16',
-            visible: false,
+            visible: true,
             messages: [
                     {
                     date: '10/01/2020 15:30:55',
@@ -117,10 +116,12 @@ var app = new Vue({
             return this.contacts.filter((element) => element.name.toLowerCase().indexOf(this.searchinput)==0);
         },
         getSearchChat: function(){
-            this.searchableArray.length == 0 ? this.searchableArray = this.contacts : this.searchableArray = this.searchChat()
+            
+             this.contacts.forEach((element, index) => {
+                 console.log(element.visible);
+                this.searchChat().includes(element) ? element.visible = true : element.visible = false;
+                console.log(element.visible);
+            })
         },
-    },
-    mounted:function(){
-        this.getSearchChat()
     },
   });
