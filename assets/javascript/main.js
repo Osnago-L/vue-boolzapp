@@ -4,6 +4,8 @@ var app = new Vue({
         refchat: 1,
         introactive: true,
         inputchat: "",
+        searchinput:'',    
+        searchableArray: [],
         contacts: [
             {
             name: 'Michele',
@@ -89,7 +91,7 @@ var app = new Vue({
                 ],
             },
         ]            
-    },
+    }, 
     methods:{
         changeChat: function(UFIndex){
             this.introactive = false;
@@ -109,9 +111,16 @@ var app = new Vue({
                     text: "ok",
                     status: 'received'
                     }
-            );}, 1000);
+            );}, 2000);
         },
-    }
+        searchChat: function(){
+            return this.contacts.filter((element) => element.name.toLowerCase().indexOf(this.searchinput)==0);
+        },
+        getSearchChat: function(){
+            this.searchableArray.length == 0 ? this.searchableArray = this.contacts : this.searchableArray = this.searchChat()
+        },
+    },
+    mounted:function(){
+        this.getSearchChat()
+    },
   });
-
-  
