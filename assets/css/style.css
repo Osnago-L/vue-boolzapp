@@ -108,10 +108,7 @@ body{
     justify-content: center;
 }
 .search-bar input{
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: hidden;
+    border-style: hidden;
     background-color: #323739;
     background-image: url("../img/magnifying-glass-solid.svg");
     background-size: 20px 20px;
@@ -211,6 +208,8 @@ body{
     background-color: #0d1418;
     height: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .focused-chat::after{
     content: "";
@@ -223,7 +222,65 @@ body{
     background-image: url("../img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png");
     opacity: 0.1;
 }
+
 /*----- FOCUSED CHAT SECTIONS */
+.focused-chat>div{
+    padding-top: 20px;
+    padding: 20px 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+}
+.input-message{
+    padding: 10px;
+    align-self: start;
+    background-color: #262d31;
+    min-width: 100px;
+    max-width: 40%;
+    min-height: 30px;
+    text-align: left;
+    color: white;
+    position: relative;
+    z-index: 999;
+    border-radius: 0px 20px 20px 20px;
+}
+.input-message::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -3px;
+    z-index: 999;
+    width: 0; 
+    height: 0; 
+    border-left: 3px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #262d31;
+}
+.output-message{
+    padding: 10px;
+    align-self: end;
+    background-color: #056162;
+    min-width: 100px;
+    max-width: 40%;
+    min-height: 30px;
+    text-align: left;
+    color: white;
+    position: relative;
+    z-index: 999;
+    border-radius: 20px 0px 20px 20px;
+}
+.output-message::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -3px;
+    z-index: 999;
+    width: 0; 
+    height: 0; 
+    border-left: 8px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 8px solid #056162;
+}
+
 /* --------------------- */
 
 .send-menu{
@@ -238,10 +295,7 @@ body{
 /*----- SEND BAR SECTIONS */
 .send-menu input{
     margin-right: 15px;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: hidden;
+    border-style: hidden;
     background-color: #323739;
     padding-left: 20px;
     border-radius: 20px 20px;
