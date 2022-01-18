@@ -119,6 +119,7 @@ body{
     justify-content: center;
 }
 .search-bar input{
+    outline: 1px solid rgba(255, 255, 255, 0.308);
     border-style: hidden;
     background-color: #323739;
     background-image: url("../img/magnifying-glass-solid.svg");
@@ -387,6 +388,7 @@ body{
 
 /*----- SEND BAR SECTIONS */
 .send-menu input{
+    outline: 1px solid rgba(255, 255, 255, 0.308);
     margin-right: 15px;
     border-style: hidden;
     background-color: #323739;
