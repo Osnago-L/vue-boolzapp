@@ -1,0 +1,224 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BACKGROUND */
+#background{
+    background-color: #090e11;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* MAIN CONTAINER  */
+.main-container{
+    width: 70%;
+    height: 95%;
+    margin: auto;
+    z-index: 2;
+    display: flex;
+}
+
+/* LEFT COLUMN---CHAT LIST  */
+#leftmenu{
+    width: 28%;
+}
+.left-column{
+    /* border-right: 1px solid rgba(255, 255, 255, 0.2); */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/* DIFFERENT SECTION LEFT COLUMN  */
+
+.main-user{
+    padding: 0 10px;
+    background-color: #2a2f32;
+    height: 50px;   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+body{
+    font-family: 'Inconsolata', monospace;
+}
+/* -------MAIN USER ELEMENTS */
+.main-user-logo{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.main-menu-icons>i{
+    color:  #b1b3b5;
+    margin-right: 10px;
+}
+/* --------------------- */
+
+.bell-notification{
+    padding: 0 10px;
+    background-color: #085373;
+    height: 80px; 
+    display: flex;
+    align-items: center;
+}
+/*----- BELL NOTIFICATION SECTIONS */
+    .circle-bell{
+        margin-right: 10px;
+        background-color: #8eb2be;
+        height: 50px; 
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .circle-bell i{
+        color: #085373;
+        font-size: 20px;
+    }
+    .bell-text{
+        display: flex;
+        flex-direction: column;
+    }
+    .bell-text span:first-child{
+        font-size: 13px;
+        color: white;
+        margin-bottom: 3px;
+    }
+    .bell-text span:nth-child(2){
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.356);
+    }
+/* --------------------- */
+
+.chats-list{
+    background-color: #131c21;
+    height: 100%; 
+}
+/*----- CHAT LIST SECTIONS */
+.search-bar{
+    height: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-bar input{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #323739;
+    background-image: url("../img/magnifying-glass-solid.svg");
+    background-size: 20px 20px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    border-radius: 20px 20px;
+    width: 90%;
+    height: 38px;
+    color: white;
+}
+/* --------------------- */
+/* --------------------- */
+
+/* RIGHT COLUMN---CHAT VIEW  */
+#chats-view{
+    width: 72%;
+}
+.right-column{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(255, 255, 255, 0.295);
+}
+
+/* DIFFERENT SECTION RIGHT COLUMN  */
+.focused-user{
+    padding: 0 10px;
+    background-color: #2a2f32;
+    height: 56px;  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.focused-user div:first-child{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/*----- FOCUSED USER SECTIONS */
+.focused-user-logo{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.focused-user h4{
+    margin-left: 10px;
+    display: inline-block;
+    color: #e1e2e3;
+}
+.focused-chat-icons>i{
+    color:  #b1b3b5;
+    margin-right: 10px;
+}
+/* --------------------- */
+
+.focused-chat{
+    background-color: #0d1418;
+    height: 100%;
+    position: relative;
+}
+.focused-chat::after{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png");
+    opacity: 0.1;
+}
+/*----- FOCUSED CHAT SECTIONS */
+/* --------------------- */
+
+.send-menu{
+    padding:  0 10px;
+    background-color: #1e2428;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*----- SEND BAR SECTIONS */
+.send-menu input{
+    margin-right: 15px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #323739;
+    padding-left: 20px;
+    border-radius: 20px 20px;
+    width: 100%;
+    height: 40px;
+    color: white;
+}
+.send-menu div:first-child{
+    width: 100px;
+}
+.send-menu i{
+    margin-right: 10px;
+    font-size: 25px;
+    color: #828689;
+}
+
+/* --------------------- */
+/* --------------------- */
