@@ -41,7 +41,7 @@
                                 <input v-model="searchinput" type="text" placeholder="Cerca o inizia una nuova chat" @keyup="getSearchChat">
                             </div>
                             <div class="unfocused-users">
-                                <section v-for="(UFUsers, UFIndex) in contacts" :class="{inactive:!contacts[UFIndex].visible}" @click="changeChat(UFIndex)">
+                                <section v-for="(UFUsers, UFIndex) in contacts" :class="{inactive:!contacts[UFIndex].visible, activeunfocused: UFIndex == refchat }" @click="changeChat(UFIndex)">
                                     <img :src="UFUsers.avatar" alt="">
                                     <div class="conversation-info">
                                         <div>
@@ -98,7 +98,7 @@
                             <input v-model="inputchat" type="text" placeholder="Scrivi un messaggio" @keyup.13="addMessage" @keyup="paperPlaneActive">
                             <div>
                                 <i class="fa-solid fa-microphone" :class='{inactive:sendbuttonactive}'></i>
-                                <i class="fa-solid fa-paper-plane" :class='{inactive:!sendbuttonactive}'></i>
+                                <i class="fa-solid fa-paper-plane" @click="addMessage" :class='{inactive:!sendbuttonactive}'></i>
                             </div>
                                 
                         </div>

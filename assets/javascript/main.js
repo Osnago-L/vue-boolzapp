@@ -131,6 +131,7 @@ var app = new Vue({
                     }
             );}, 1000);
             this.inputchat = ""
+            this.paperPlaneActive()
         },
         removeMessage: function(FIndex){
             console.log(FIndex);
