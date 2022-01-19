@@ -6,7 +6,7 @@
 
 body{
     font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
-    overflow-y: hidden;
+    
 }
 .noscrollbar::-webkit-scrollbar {
     display: none;
@@ -285,7 +285,9 @@ body{
     position: relative;
     display: flex;
     flex-direction: column;
-    
+    padding-top: 20px;
+    padding: 20px 30px 0 30px;
+    overflow: scroll;
 }
 .focused-chat::after{
     content: "";
@@ -300,12 +302,7 @@ body{
 }
 
 /*----- FOCUSED CHAT SECTIONS */
-.focused-chat>div{
-    padding-top: 20px;
-    padding: 20px 30px 0 30px;
-    display: flex;
-    flex-direction: column;   
-}
+
 /* RECEIVED MESSAGE  */
 .received-message::before{
     content: "";

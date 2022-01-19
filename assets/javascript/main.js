@@ -134,7 +134,6 @@ var app = new Vue({
             this.paperPlaneActive()
         },
         removeMessage: function(FIndex){
-            console.log(FIndex);
             this.contacts[this.refchat].messages.splice(FIndex, 1);
         },
         searchChat: function(){
@@ -142,9 +141,7 @@ var app = new Vue({
         },
         getSearchChat: function(){
              this.contacts.forEach((element, index) => {
-                 console.log(element.visible);
                 this.searchChat().includes(element) ? element.visible = true : element.visible = false;
-                console.log(element.visible);
             })
         },
         paperPlaneActive: function(){
