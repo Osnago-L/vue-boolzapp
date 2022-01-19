@@ -75,14 +75,18 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </div>
                         </div>
-                        <div class="focused-chat">
-                            <div>
+                        <div class="focused-chat noscrollbar">
+                            <div class="noscrollbar">
                                 <div v-for="(FUser,FIndex) in contacts[refchat].messages" :class="`${contacts[refchat].messages[FIndex].status}-message`" class="active">
                                     <div>
                                         <span>{{contacts[refchat].messages[FIndex].text}}</span>
+                                        <!-- <img :src="contacts[refchat].messages[FIndex].image" :class="{inactive:!contacts[refchat].messages[FIndex].imgactive}"> -->
                                         <span>{{contacts[refchat].messages[FIndex].date}}</span>
                                     </div>
-                                    <i class="fa-solid fa-angle-down"></i>
+                                    <i class="fa-solid fa-angle-down" @click="dropDownshow(FIndex)"></i>
+                                    <div class="dropdown-message" :class="{inactive:!contacts[refchat].messages[FIndex].dropdownActive}">
+                                        <span @click="removeMessage(FIndex)">Cancella Messaggio</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

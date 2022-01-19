@@ -6,7 +6,16 @@
 
 body{
     font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
+    overflow-y: hidden;
 }
+.noscrollbar::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.noscrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
 .inactive{
  display: none!important;
@@ -272,6 +281,7 @@ body{
     position: relative;
     display: flex;
     flex-direction: column;
+    overflow-y:scroll;
 }
 .focused-chat::after{
     content: "";
@@ -290,8 +300,9 @@ body{
     padding-top: 20px;
     padding: 20px 30px 0 30px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   
 }
+/* RECEIVED MESSAGE  */
 .received-message::before{
     content: "";
     position: absolute;
@@ -315,7 +326,7 @@ body{
     color: white;
     font-size: 14px;
     position: relative;
-    z-index: 999;
+    z-index: 998;
     border-radius: 0px 15px 15px 15px;
     margin-bottom: 15px;
     display: flex;
@@ -329,7 +340,9 @@ body{
 .received-message>div>span:nth-child(2){
     font-size: 10px;
     color: rgba(255, 255, 255, 0.384);
+    text-align: end;
 }
+/* SENT MESSAGE  */
 .sent-message::before{
     content: "";
     position: absolute;
@@ -349,11 +362,11 @@ body{
     min-width: 30px;
     max-width: 40%;
     min-height: 30px;
-    text-align: right;
+    text-align: left;
     font-size: 14px;
     color: white;
     position: relative;
-    z-index: 999;
+    z-index: 998;
     border-radius: 15px 0px 15px 15px;
     margin-bottom: 15px;
     display: flex; 
@@ -361,18 +374,35 @@ body{
 .sent-message>div>span:nth-child(2){
     font-size: 10px;
     color: rgba(255, 255, 255, 0.384);
+    text-align: end;
 }
 .sent-message>div{
     display: flex;
     flex-direction: column;
     margin-right: 10px;
 }
+
+/* ARROW DROPDOWN  */
 .sent-message>i,.received-message>i{
     opacity: 0;
     transition: opacity 0.2s;
 }
 .active:hover>i{
     opacity: 1;
+}
+
+/* DROPDOWN MESSAGES */
+
+.dropdown-message{
+    padding: 10px 10px;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: white;
+    color: black;
+}
+.dropdown-message>span{
+    cursor: pointer;
 }
 
 /* --------------------- */
