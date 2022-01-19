@@ -281,7 +281,7 @@ body{
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow-y:scroll;
+    
 }
 .focused-chat::after{
     content: "";
@@ -396,10 +396,12 @@ body{
 .dropdown-message{
     padding: 10px 10px;
     position: absolute;
-    top: 30px;
-    right: 0;
-    background-color: white;
-    color: black;
+    top: 20px;
+    right: -130px;
+    z-index: 2000;
+    background-color: #262d31;
+    color: white;
+    box-shadow: 1px 1px 3px black;
 }
 .dropdown-message>span{
     cursor: pointer;
