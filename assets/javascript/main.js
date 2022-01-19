@@ -9,7 +9,7 @@ var app = new Vue({
         searchinput:'',
         contacts: [
             {
-            name: 'Michele',
+            name: 'Matteo Pompei',
             avatar: 'https://unsplash.it/50/50?image=11',
             visible: true,
             messages: [
@@ -34,7 +34,7 @@ var app = new Vue({
                 ],
             },
             {
-            name: 'Fabio',
+            name: 'Fabio Losa',
             avatar: 'https://unsplash.it/50/50?image=15',
             visible: true,
             messages: [
@@ -59,7 +59,7 @@ var app = new Vue({
                 ],
             },
             {
-            name: 'Samuele',
+            name: 'Marco Lotti',
             avatar: 'https://unsplash.it/50/50?image=13',
             visible: true,
             messages: [
@@ -84,7 +84,7 @@ var app = new Vue({
                 ],
             },
             {
-            name: 'Luisa',
+            name: 'Simone Bruno',
             avatar: 'https://unsplash.it/50/50?image=16',
             visible: true,
             messages: [
