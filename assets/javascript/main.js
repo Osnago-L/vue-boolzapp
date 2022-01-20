@@ -117,6 +117,7 @@ var app = new Vue({
             console.log(scrollDiv.scrollHeight);
         },
         addMessage: function(){
+            let scrollDiv =  document.querySelector(".focused-chat");
             let date = new Date()
             // scusa in anticipo, Simone. 
             let newdate = (date.getDate() + '/' +  ((date.getMonth() + 1) ? "0"+ (date.getMonth() + 1):(date.getMonth() + 1)) + '/' + date.getFullYear()) + " " + date.getHours() + ":" + (date.getMinutes()<10 ? "0"+ date.getMinutes():date.getMinutes()) + ":" + date.getSeconds();
@@ -129,6 +130,9 @@ var app = new Vue({
                     dropdownActive: false,
                     }
             );
+            setTimeout(() => {
+                scrollDiv.scrollTop = scrollDiv.scrollHeight;
+            }, 10);
             setTimeout(() => {this.contacts[this.refchat].messages.push(
                 {
                     date: newdate,
@@ -136,10 +140,10 @@ var app = new Vue({
                     status: 'received',
                     dropdownActive: false,
                     }
-            );}, 1000);
+            );
+            }, 1000);
             this.inputchat = ""
             this.paperPlaneActive()
-            let scrollDiv =  document.querySelector(".focused-chat");
             setTimeout(() => {
                 scrollDiv.scrollTop = scrollDiv.scrollHeight;
             }, 1001);
