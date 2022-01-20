@@ -142,7 +142,7 @@ var app = new Vue({
             let scrollDiv =  document.querySelector(".focused-chat");
             setTimeout(() => {
                 scrollDiv.scrollTop = scrollDiv.scrollHeight;
-            }, 10);
+            }, 1001);
         },
         removeMessage: function(FIndex){
             this.contacts[this.refchat].messages.splice(FIndex, 1);
@@ -159,7 +159,7 @@ var app = new Vue({
             this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
             setTimeout(() => {
                 this.contacts[this.refchat].messages[FIndex].dropdownActive = !this.contacts[this.refchat].messages[FIndex].dropdownActive;
-            }, 1);
+            }, 50);
         },
         stopAllDropdown: function(){
             this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
