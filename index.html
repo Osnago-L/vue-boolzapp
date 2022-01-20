@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Boolzapp</title>
-</head>
-<body>
-    <main>
-        <div id="background">
-            <div id="app" class="main-container">
-                <section id="leftmenu">
-                    <div class="left-column">
-                        <div>
-                            <div  class="main-user">
-                                <img class="main-user-logo" src='https://unsplash.it/50/50?image=1' alt="">
-                                <div class="main-menu-icons">
-                                    <i class="fa-solid fa-bowling-ball"></i>
-                                    <i class="fa-solid fa-message"></i>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <title>Boolzapp</title>
+    </head>
+    <body  >
+        <main id="app" @click="stopAllDropdown">
+            <div id="background">
+                <div  class="main-container">
+                    <section id="leftmenu">
+                        <div class="left-column">
+                            <div>
+                                <div class="main-user">
+                                    <img class="main-user-logo" src='https://unsplash.it/50/50?image=1' alt="">
+                                    <div class="main-menu-icons">
+                                        <i class="fa-solid fa-bowling-ball"></i>
+                                        <i class="fa-solid fa-message"></i>
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </div>
+                                <div class="bell-notification" :class="{inactive:!bellactive}">
+                                    <div class="circle-bell">
+                                        <i class="fa-solid fa-bell-slash"></i>
+                                    </div>
+                                    <div class="bell-text">
+                                        <span>Ricevi notifiche di nuovi messaggi</span>
+                                        <span class="underline" @click="bellactive = false">Attiva notifiche desktop</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="search-bar">
+                                    <input v-model="searchinput" type="text" placeholder="Cerca o inizia una nuova chat" @keyup="getSearchChat">
+                                </div>
+                                <div class="unfocused-users">
+                                    <section v-for="(UFUsers, UFIndex) in contacts" :class="{inactive:!contacts[UFIndex].visible, activeunfocused: UFIndex == refchat }" class="activeunfocused-hover" @click="changeChat(UFIndex)">
+                                        <img :src="UFUsers.avatar" alt="">
+                                        <div class="conversation-info">
+                                            <div>
+                                                <span>{{UFUsers.name}}</span>
+                                                <span>{{UFUsers.messages.at(-1).date}}</span>
+                                            </div>
+                                            <span>{{UFUsers.messages.at(-1).text}}</span>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="chats-view">
+                        <div :class="{inactive:!introactive}" class="intro-page">
+                            <div>
+                                <img src="assets/img/intro-connection-dark_0ee01153183b5ebd9b296399cc2104b0.jpg" alt="">
+                                <span>Mantieni il telefono connesso</span>
+                                <p>Boolzapp si collega al tuo telefono per sincronizzare i messaggi. Per ridurre l'utilizzo dei dati, collega il tuo telefono al wifi</p>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="right-column">
+                            <div class="focused-user">
+                                <div>
+                                    <img class="focused-user-logo" :src="contacts[refchat].avatar" alt="">
+                                    <h4>{{contacts[refchat].name}}</h4>
+                                </div>
+                                <div class="focused-chat-icons">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                             </div>
-                            <div class="bell-notification" :class="{inactive:!bellactive}">
-                                <div class="circle-bell">
-                                    <i class="fa-solid fa-bell-slash"></i>
-                                </div>
-                                <div class="bell-text">
-                                    <span>Ricevi notifiche di nuovi messaggi</span>
-                                    <span class="underline" @click="bellactive = false">Attiva notifiche desktop</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chats-list">
-                            <div class="search-bar">
-                                <input v-model="searchinput" type="text" placeholder="Cerca o inizia una nuova chat" @keyup="getSearchChat">
-                            </div>
-                            <div class="unfocused-users">
-                                <section v-for="(UFUsers, UFIndex) in contacts" :class="{inactive:!contacts[UFIndex].visible, activeunfocused: UFIndex == refchat }" class="activeunfocused-hover" @click="changeChat(UFIndex)">
-                                    <img :src="UFUsers.avatar" alt="">
-                                    <div class="conversation-info">
-                                        <div>
-                                            <span>{{UFUsers.name}}</span>
-                                            <span>{{UFUsers.messages.at(-1).date}}</span>
-                                        </div>
-                                        <span>{{UFUsers.messages.at(-1).text}}</span>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section id="chats-view">
-                    <div :class="{inactive:!introactive}" class="intro-page">
-                        <div>
-                            <img src="assets/img/intro-connection-dark_0ee01153183b5ebd9b296399cc2104b0.jpg" alt="">
-                            <span>Mantieni il telefono connesso</span>
-                            <p>Boolzapp si collega al tuo telefono per sincronizzare i messaggi. Per ridurre l'utilizzo dei dati, collega il tuo telefono al wifi</p>
-                        </div>
-                        <div></div>
-                    </div>
-                    <div class="right-column">
-                        <div class="focused-user">
-                            <div>
-                                <img class="focused-user-logo" :src="contacts[refchat].avatar" alt="">
-                                <h4>{{contacts[refchat].name}}</h4>  
-                            </div>
-                            <div class="focused-chat-icons">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </div>
-                        <div class="focused-chat noscrollbar">
-                            
+                            <div class="focused-chat noscrollbar">
                                 <div v-for="(FUser,FIndex) in contacts[refchat].messages" :class="`${contacts[refchat].messages[FIndex].status}-message`" class="active">
                                     <div>
                                         <span>{{contacts[refchat].messages[FIndex].text}}</span>
-                                        <!-- <img :src="contacts[refchat].messages[FIndex].image" :class="{inactive:!contacts[refchat].messages[FIndex].imgactive}"> -->
                                         <span>{{contacts[refchat].messages[FIndex].date}}</span>
                                     </div>
                                     <i class="fa-solid fa-angle-down" @click="dropDownshow(FIndex)"></i>
@@ -88,26 +86,26 @@
                                         <span @click="removeMessage(FIndex)">Cancella Messaggio</span>
                                     </div>
                                 </div>
-                            
-                        </div>
-                        <div class="send-menu">
-                            <div>
-                                <i class="fa-regular fa-face-smile"></i>
-                                <i class="fa-solid fa-paperclip"></i>
+
                             </div>
-                            <input v-model="inputchat" type="text" placeholder="Scrivi un messaggio..." @keyup.13="addMessage" @keyup="paperPlaneActive">
-                            <div>
-                                <i class="fa-solid fa-microphone" :class='{inactive:sendbuttonactive}'></i>
-                                <i class="fa-solid fa-paper-plane" @click="addMessage" :class='{inactive:!sendbuttonactive}'></i>
+                            <div class="send-menu">
+                                <div>
+                                    <i class="fa-regular fa-face-smile"></i>
+                                    <i class="fa-solid fa-paperclip"></i>
+                                </div>
+                                <input v-model="inputchat" type="text" placeholder="Scrivi un messaggio..." @keyup.13="addMessage" @keyup="paperPlaneActive">
+                                <div>
+                                    <i class="fa-solid fa-microphone" :class='{inactive:sendbuttonactive}'></i>
+                                    <i class="fa-solid fa-paper-plane" @click="addMessage" :class='{inactive:!sendbuttonactive}'></i>
+                                </div>
+
                             </div>
-                                
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
-    </main>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-<script src="assets/javascript/main.js"></script>
-</body>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="assets/javascript/main.js"></script>
+    </body>
 </html>

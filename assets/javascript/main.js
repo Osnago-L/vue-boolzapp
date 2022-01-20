@@ -106,12 +106,19 @@ var app = new Vue({
     }, 
     methods:{
         changeChat: function(UFIndex){
+            let scrollDiv =  document.querySelector(".focused-chat");
             this.introactive = false;
             this.refchat = UFIndex;
+            setTimeout(() => {
+                scrollDiv.scrollTop = scrollDiv.scrollHeight;
+            }, 1);
+            
+            console.log(scrollDiv.scrollTop);
+            console.log(scrollDiv.scrollHeight);
         },
         addMessage: function(){
             let date = new Date()
-            // scusa in anticipo,Simone. 
+            // scusa in anticipo, Simone. 
             let newdate = (date.getDate() + '/' +  ((date.getMonth() + 1) ? "0"+ (date.getMonth() + 1):(date.getMonth() + 1)) + '/' + date.getFullYear()) + " " + date.getHours() + ":" + (date.getMinutes()<10 ? "0"+ date.getMinutes():date.getMinutes()) + ":" + date.getSeconds();
             
             this.contacts[this.refchat].messages.push(
@@ -132,23 +139,30 @@ var app = new Vue({
             );}, 1000);
             this.inputchat = ""
             this.paperPlaneActive()
+            let scrollDiv =  document.querySelector(".focused-chat");
+            setTimeout(() => {
+                scrollDiv.scrollTop = scrollDiv.scrollHeight;
+            }, 10);
         },
         removeMessage: function(FIndex){
             this.contacts[this.refchat].messages.splice(FIndex, 1);
         },
-        searchChat: function(){
-            return this.contacts.filter((element) => element.name.toLowerCase().indexOf(this.searchinput)==0);
-        },
         getSearchChat: function(){
              this.contacts.forEach((element, index) => {
-                this.searchChat().includes(element) ? element.visible = true : element.visible = false;
+                element.name.toLowerCase().includes(this.searchinput) ? element.visible = true : element.visible = false;
             })
         },
         paperPlaneActive: function(){
             this.inputchat != "" ? this.sendbuttonactive = true : this.sendbuttonactive = false;
         },
         dropDownshow: function(FIndex){
-            this.contacts[this.refchat].messages[FIndex].dropdownActive = ! this.contacts[this.refchat].messages[FIndex].dropdownActive
+            this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
+            setTimeout(() => {
+                this.contacts[this.refchat].messages[FIndex].dropdownActive = !this.contacts[this.refchat].messages[FIndex].dropdownActive;
+            }, 1);
+        },
+        stopAllDropdown: function(){
+            this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
         },
     },
   });
