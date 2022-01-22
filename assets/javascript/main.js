@@ -6,7 +6,8 @@ var app = new Vue({
         bellactive: true,
         sendbuttonactive: false,
         inputchat: "",
-        searchinput:'',
+        statusUF:"",
+        searchinput: "",
         contacts: [
             {
             name: 'Matteo Pompei',
@@ -105,68 +106,92 @@ var app = new Vue({
         ]            
     }, 
     methods:{
+        // CAMBIA CHAT 
         changeChat: function(UFIndex){
-            let scrollDiv =  document.querySelector(".focused-chat");
             this.introactive = false;
             this.refchat = UFIndex;
-            setTimeout(() => {
-                scrollDiv.scrollTop = scrollDiv.scrollHeight;
-            }, 1);
-            
-            console.log(scrollDiv.scrollTop);
-            console.log(scrollDiv.scrollHeight);
+            this.statusUF =  `Ultimo accesso alle ${this.contacts[this.refchat].messages.at(-1).date}`     
+            // this.updateScroll()
         },
+        // ADD MESSAGES 
         addMessage: function(){
-            let scrollDiv =  document.querySelector(".focused-chat");
             let date = new Date()
             // scusa in anticipo, Simone. 
             let newdate = (date.getDate() + '/' +  ((date.getMonth() + 1) ? "0"+ (date.getMonth() + 1):(date.getMonth() + 1)) + '/' + date.getFullYear()) + " " + date.getHours() + ":" + (date.getMinutes()<10 ? "0"+ date.getMinutes():date.getMinutes()) + ":" + date.getSeconds();
-            
+   
+            if((this.inputchat != "") && (this.inputchat.trim().length !== 0 )){
             this.contacts[this.refchat].messages.push(
                 {
                     date: newdate,
                     text: this.inputchat,
                     status: 'sent',
                     dropdownActive: false,
-                    }
+                }
             );
-            setTimeout(() => {
-                scrollDiv.scrollTop = scrollDiv.scrollHeight;
-            }, 10);
+            // this.updateScroll()
+            this.addBotMess(newdate)
+            this.inputchat = ""
+            this.paperPlaneActive()
+        } else{
+            this.inputchat = ""
+            this.paperPlaneActive()
+            return
+        }
+        },
+        addBotMess: function(date){
+            this.statusUF = "Sta scrivendo..."
             setTimeout(() => {this.contacts[this.refchat].messages.push(
                 {
-                    date: newdate,
+                    date: date,
                     text: "ok",
                     status: 'received',
                     dropdownActive: false,
                     }
             );
-            }, 1000);
-            this.inputchat = ""
-            this.paperPlaneActive()
+            // this.updateScroll()
+            this.statusUF = `Online`
             setTimeout(() => {
+                this.statusUF = `Ultimo accesso alle ${this.contacts[this.refchat].messages.at(-1).date}`
+            },2000);
+            
+            }, 1000);
+        },
+
+        // scroll 
+        updateScroll: function(){
+            let scrollDiv =  document.querySelector(".focused-chat");
                 scrollDiv.scrollTop = scrollDiv.scrollHeight;
-            }, 1001);
         },
-        removeMessage: function(FIndex){
-            this.contacts[this.refchat].messages.splice(FIndex, 1);
-        },
-        getSearchChat: function(){
-             this.contacts.forEach((element, index) => {
-                element.name.toLowerCase().includes(this.searchinput) ? element.visible = true : element.visible = false;
-            })
-        },
+        // paper plane 
         paperPlaneActive: function(){
             this.inputchat != "" ? this.sendbuttonactive = true : this.sendbuttonactive = false;
         },
+
+        // DROPDOWN E CANCELLA MESSAGGIO 
         dropDownshow: function(FIndex){
-            this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
-            setTimeout(() => {
-                this.contacts[this.refchat].messages[FIndex].dropdownActive = !this.contacts[this.refchat].messages[FIndex].dropdownActive;
-            }, 50);
+            if(this.contacts[this.refchat].messages[FIndex].dropdownActive == true){
+                this.contacts[this.refchat].messages[FIndex].dropdownActive = false;
+            }else{
+                setTimeout(() => {
+                    this.contacts[this.refchat].messages[FIndex].dropdownActive = !this.contacts[this.refchat].messages[FIndex].dropdownActive;
+                }, 50);
+            }
         },
         stopAllDropdown: function(){
             this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
         },
+        removeMessage: function(FIndex){
+            this.contacts[this.refchat].messages.splice(FIndex, 1);
+        },
+
+        // BARRA DI RICERCA
+        getSearchChat: function(){
+            this.contacts.forEach((element, index) => {
+               element.name.toLowerCase().includes(this.searchinput) ? element.visible = true : element.visible = false;
+           });
+       },
     },
+    updated: function(){
+        this.updateScroll()
+    }
   });

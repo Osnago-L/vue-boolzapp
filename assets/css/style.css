@@ -259,11 +259,15 @@ body{
     align-items: center;
     justify-content: space-between;
 }
-.focused-user div:first-child{
-    
+.focused-user>div:first-child{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+}
+
+.focused-user>div:first-child>div{  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 /*----- FOCUSED USER SECTIONS */
 .focused-user-logo{
@@ -272,13 +276,21 @@ body{
     border-radius: 50%;
 }
 .focused-user h4{
+    font: 20px;
     margin-left: 10px;
-    display: inline-block;
     color: #e1e2e3;
+    align-self: flex-start;
+}
+.focused-user span{
+    font-size: 10px;
+    margin-left: 10px;
+    align-self: flex-start;
+    color: #dfe0e273;
 }
 .focused-chat-icons>i{
     color:  #b1b3b5;
     margin-right: 10px;
+    
 }
 /* --------------------- */
 

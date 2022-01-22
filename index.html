@@ -46,9 +46,9 @@
                                         <div class="conversation-info">
                                             <div>
                                                 <span>{{UFUsers.name}}</span>
-                                                <span>{{UFUsers.messages.at(-1).date}}</span>
+                                                <span v-if="UFUsers.messages.length >0">{{UFUsers.messages.at(-1).date}}</span>
                                             </div>
-                                            <span>{{UFUsers.messages.at(-1).text}}</span>
+                                            <span v-if="UFUsers.messages.length > 0">{{UFUsers.messages.at(-1).text}}</span>
                                         </div>
                                     </section>
                                 </div>
@@ -68,7 +68,10 @@
                             <div class="focused-user">
                                 <div>
                                     <img class="focused-user-logo" :src="contacts[refchat].avatar" alt="">
-                                    <h4>{{contacts[refchat].name}}</h4>
+                                    <div>
+                                        <h4>{{contacts[refchat].name}}</h4>
+                                        <span>{{statusUF}}</span>
+                                    </div>
                                 </div>
                                 <div class="focused-chat-icons">
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -98,7 +101,6 @@
                                     <i class="fa-solid fa-microphone" :class='{inactive:sendbuttonactive}'></i>
                                     <i class="fa-solid fa-paper-plane" @click="addMessage" :class='{inactive:!sendbuttonactive}'></i>
                                 </div>
-
                             </div>
                         </div>
                     </section>
