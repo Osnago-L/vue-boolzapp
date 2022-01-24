@@ -124,7 +124,7 @@ var app = new Vue({
             if((this.inputchat != "") && (this.inputchat.trim().length !== 0 )){
             this.contacts[this.refchat].messages.push(
                 {
-                    date: dayjs().format('DD/MM/YYYY') + " " + dayjs().format('hh:mm:ss') ,
+                    date: dayjs().format('DD/MM/YYYY') + " " + dayjs().format('HH:mm:ss') ,
                     text: this.inputchat,
                     status: 'sent',
                     dropdownActive: false,
@@ -144,7 +144,7 @@ var app = new Vue({
             this.statusUF = "Sta scrivendo..."
             setTimeout(() => {this.contacts[this.refchat].messages.push(
                 {
-                    date: dayjs().format('DD/MM/YYYY') + " " + dayjs().format('hh:mm:ss'),
+                    date: dayjs().format('DD/MM/YYYY') + " " + dayjs().format('HH:mm:ss'),
                     text: "ok",
                     status: 'received',
                     dropdownActive: false,
