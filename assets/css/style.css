@@ -3,28 +3,73 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+/* GENERAL CLASSES */
 body{
-    font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;
-    
+    font-family: Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif;  
 }
 .noscrollbar::-webkit-scrollbar {
     display: none;
 }
-/* Hide scrollbar for IE, Edge and Firefox */
+
 .noscrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
   }
 
 .inactive{
- display: none!important;
+    display: none!important;
 }
 
 .underline:hover{
     text-decoration: underline;
     cursor: pointer;
 }
+/* LOADING SCREEN  */
+#loading_screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    height: 100vh;
+    width: 100vw;
+    background-color: #2a2f32;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#loading_screen>img{
+    width: 100px;
+    height: 100px;
+    opacity: 0.3;
+}
+.loading-bar-grey{
+    position: relative;
+    margin-top: 20px;
+    width: 300px;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px 20px; 
+}
+.loading-bar-green{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0px;
+    height: 5px;
+    background-color: #056162;
+    border-radius: 20px 20px;
+    animation: loading-animation 3s;
+}
+@keyframes loading-animation {
+    from {
+        width: 0px;
+    }
+  
+    to {
+        width: 300px;
+    }
+  }
 
 /* BACKGROUND */
 #background{
@@ -149,7 +194,9 @@ body{
     padding: 5px 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
+    position: relative;
 }
+
 .unfocused-users img{
     width: 50px;
     height: 50px;
@@ -281,7 +328,7 @@ body{
     color: #e1e2e3;
     align-self: flex-start;
 }
-.focused-user span{
+.focused-user>div>div>span{
     font-size: 10px;
     margin-left: 10px;
     align-self: flex-start;
@@ -292,6 +339,24 @@ body{
     margin-right: 10px;
     
 }
+
+.dropdown-chat{
+    padding: 10px 10px;
+    position: absolute;
+    top: 35px;
+    right: -115px;
+    z-index: 2000;
+    background-color: #262d31;
+    color: white;
+    box-shadow: 1px 1px 3px black;
+    display: flex;
+    flex-direction: column;
+}
+.dropdown-chat>span{
+    margin: 5px 0px;
+    cursor: pointer;
+    font-size: 14px;
+}
 /* --------------------- */
 
 .focused-chat{
@@ -301,7 +366,7 @@ body{
     display: flex;
     flex-direction: column;
     padding-top: 20px;
-    padding: 20px 30px 0 30px;
+    padding: 20px 90px 0 90px;
     overflow-y: scroll;
     background-image: url("../img/sfondo_whatsapp.png");
 }
@@ -336,7 +401,7 @@ body{
     border-radius: 0px 15px 15px 15px;
     margin-bottom: 15px;
     display: flex;
-    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .received-message>div{
@@ -376,7 +441,7 @@ body{
     border-radius: 15px 0px 15px 15px;
     margin-bottom: 15px;
     display: flex; 
-    word-wrap: break-word;
+    word-break: break-all;
     
 }
 .sent-message>div>span:nth-child(2){
@@ -405,7 +470,7 @@ body{
     padding: 10px 10px;
     position: absolute;
     top: 20px;
-    right: -130px;
+    right: -90px;
     z-index: 2000;
     background-color: #262d31;
     color: white;

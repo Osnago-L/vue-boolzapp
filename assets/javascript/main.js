@@ -13,6 +13,7 @@ var app = new Vue({
             name: 'Matteo Pompei',
             avatar: 'https://unsplash.it/50/50?image=11',
             visible: true,
+            chatmenu: false,
             messages: [
                     {
                     date: '10/01/2020 15:30:55',
@@ -38,6 +39,7 @@ var app = new Vue({
             name: 'Fabio Losa',
             avatar: 'https://unsplash.it/50/50?image=15',
             visible: true,
+            chatmenu: false,
             messages: [
                     {
                     date: '20/03/2020 16:30:00',
@@ -63,6 +65,7 @@ var app = new Vue({
             name: 'Marco Lotti',
             avatar: 'https://unsplash.it/50/50?image=13',
             visible: true,
+            chatmenu: false,
             messages: [
                     {
                     date: '28/03/2020 10:10:40',
@@ -88,6 +91,7 @@ var app = new Vue({
             name: 'Simone Bruno',
             avatar: 'https://unsplash.it/50/50?image=16',
             visible: true,
+            chatmenu: false,
             messages: [
                     {
                     date: '10/01/2020 15:30:55',
@@ -110,26 +114,24 @@ var app = new Vue({
         changeChat: function(UFIndex){
             this.introactive = false;
             this.refchat = UFIndex;
-            this.statusUF =  `Ultimo accesso alle ${this.contacts[this.refchat].messages.at(-1).date}`     
-            // this.updateScroll()
+            if(this.contacts[this.refchat].messages.length>0){
+                this.statusUF =  `Ultimo accesso alle ${this.contacts[this.refchat].messages.at(-1).date}` 
+            }    
         },
         // ADD MESSAGES 
         addMessage: function(){
-            let date = new Date()
-            // scusa in anticipo, Simone. 
-            let newdate = (date.getDate() + '/' +  ((date.getMonth() + 1) ? "0"+ (date.getMonth() + 1):(date.getMonth() + 1)) + '/' + date.getFullYear()) + " " + date.getHours() + ":" + (date.getMinutes()<10 ? "0"+ date.getMinutes():date.getMinutes()) + ":" + date.getSeconds();
-   
+
             if((this.inputchat != "") && (this.inputchat.trim().length !== 0 )){
             this.contacts[this.refchat].messages.push(
                 {
-                    date: newdate,
+                    date: dayjs().format('DD/MM/YYYY') + " " + dayjs().format('hh:mm:ss') ,
                     text: this.inputchat,
                     status: 'sent',
                     dropdownActive: false,
                 }
             );
             // this.updateScroll()
-            this.addBotMess(newdate)
+            this.addBotMess()
             this.inputchat = ""
             this.paperPlaneActive()
         } else{
@@ -138,17 +140,16 @@ var app = new Vue({
             return
         }
         },
-        addBotMess: function(date){
+        addBotMess: function(){
             this.statusUF = "Sta scrivendo..."
             setTimeout(() => {this.contacts[this.refchat].messages.push(
                 {
-                    date: date,
+                    date: dayjs().format('DD/MM/YYYY') + " " + dayjs().format('hh:mm:ss'),
                     text: "ok",
                     status: 'received',
                     dropdownActive: false,
                     }
             );
-            // this.updateScroll()
             this.statusUF = `Online`
             setTimeout(() => {
                 this.statusUF = `Ultimo accesso alle ${this.contacts[this.refchat].messages.at(-1).date}`
@@ -178,12 +179,40 @@ var app = new Vue({
             }
         },
         stopAllDropdown: function(){
+            if (this.contacts.length>0){
             this.contacts[this.refchat].messages.forEach(element => {element.dropdownActive = false});
+
+        }else{
+            return
+        }
         },
         removeMessage: function(FIndex){
             this.contacts[this.refchat].messages.splice(FIndex, 1);
         },
-
+        // DROPDOWN E CANCELLA CHAT-MESSAGGI
+        dropDownChatshow: function(){
+            this.contacts[this.refchat].chatmenu = !this.contacts[this.refchat].chatmenu
+        },
+        removeMessages: function(){
+            this.contacts[this.refchat].chatmenu = !this.contacts[this.refchat].chatmenu
+            this.contacts[this.refchat].messages = []
+        },
+        removeChat: function(){
+            this.contacts[this.refchat].chatmenu = !this.contacts[this.refchat].chatmenu
+            if(this.refchat == (this.contacts.length -1) && (this.contacts.length > 1)){
+                this.refchat = this.refchat -1
+                this.contacts.pop()
+                console.log(this.refchat);
+            }else if(this.contacts.length == 1){
+                this.introactive = true;
+                this.contacts.pop()
+                
+            }else{
+                this.contacts.splice(this.refchat, 1);
+                
+            }
+            
+        },
         // BARRA DI RICERCA
         getSearchChat: function(){
             this.contacts.forEach((element, index) => {
@@ -192,6 +221,15 @@ var app = new Vue({
        },
     },
     updated: function(){
-        this.updateScroll()
-    }
+        if (this.contacts.length>0){
+            this.updateScroll()
+        }else{
+            return
+        }
+    },
+    created: function(){
+        setTimeout(() => {
+          document.getElementById("loading_screen").classList.add("inactive")
+        },3000);
+    },
   });
